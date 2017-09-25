@@ -20,6 +20,8 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
+
+
 <title>Online Shopping - ${title}</title>
 <script>
 	window.menu = '${title}';
@@ -60,6 +62,11 @@
 			<!-- Load only when user clicks contact -->
 			<c:if test="${userClickContact == true }">
 				<%@include file="contact.jsp"%>
+			</c:if>
+			
+			<!-- Load only when user clicks product-->
+			<c:if test="${userClickAllProducts == true or userClickCategoryProducts == true }">
+				<%@include file="listProducts.jsp"%>
 			</c:if>
 
 		</div>

@@ -5,17 +5,18 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
+        
           <ul class="navbar-nav ml-auto">
             <li class="nav-item ">
-              <a class="nav-link" href="#">Home
+              <a class="nav-link" href="${contextRoot}/home">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item" id="about">
               <a class="nav-link" href="${contextRoot}/about">About</a>
             </li>
-            <li class="nav-item" id="listproduct">
-              <a class="nav-link" href="${contextRoot}/listproduct">View Product</a>
+            <li class="nav-item" id="listProducts">
+              <a class="nav-link" href="${contextRoot}/show/all/products">View Product</a>
             </li>
             <li class="nav-item" id="contact">
               <a class="nav-link" href="${contextRoot}/contact">Contact</a>
