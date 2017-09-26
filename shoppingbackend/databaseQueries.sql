@@ -10,3 +10,4 @@
 
 	);
 	
+INSERT INTO category(name, description, image_url, is_active) VALUES ('Laptop', 'this is description for mobile category', 'CAT_3.png', true);
