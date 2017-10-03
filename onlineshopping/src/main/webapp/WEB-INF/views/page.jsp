@@ -83,6 +83,9 @@
 		<script src="${js}/jquery.min.js"></script>
 		<script src="${js}/popper.min.js"></script>
 		<script src="${js}/bootstrap.min.js"></script>
+		
+		<!-- DataTables Plugin-->
+		<script src="${js}/jquery.dataTables.js"></script>
 
 		<!-- self coded java Script -->
 		<script src="${js}/myapp.js"></script>
