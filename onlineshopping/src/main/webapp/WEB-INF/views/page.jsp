@@ -40,6 +40,11 @@
 <!-- Custom styles for this template -->
 <link href="${css}/myapp.css" rel="stylesheet">
 
+<!-- Custom styles for this template -->
+<link href="${css}/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css"> -->
+
 </head>
 
 <body>

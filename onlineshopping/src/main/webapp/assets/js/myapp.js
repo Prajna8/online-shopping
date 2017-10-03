@@ -52,6 +52,14 @@ $(function() {
 				
 				columns: [
 							{
+								data:'code',
+								mRender: function(data,type,row){
+									
+									return '<img src="'+window.contextRoot+'/resources/images/'+data+'.jpg" class="dataTableImg"/>'
+								}
+								
+							},
+							{
 								data:'name'
 							},
 							{
@@ -67,12 +75,13 @@ $(function() {
 								data:'quantity'	
 							},
 							{
-								data:'unitPrice',
+								data:'id',
+								bSortable: false,
 								mRender: function(data, type, row){
 									
 									var str='';
-									str +='<a href="'+ window.contextRoot +'/show/'+ data +'/product" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
-									str +='<a href="'+ window.contextRoot +'/cart/add/'+ data +'/product" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+									str +='<a href="'+ window.contextRoot +'/show/'+ data +'/product" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></a> &#160;';
+									str +='<a href="'+ window.contextRoot +'/cart/add/'+ data +'/product" class="btn btn-success btn-sm"><i class="fa fa-shopping-cart" aria-hidden="true"> Add To Cart </i></span></a>';
 									
 									return str;
 								}
