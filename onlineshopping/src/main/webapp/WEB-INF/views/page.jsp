@@ -25,10 +25,16 @@
 <title>Online Shopping - ${title}</title>
 <script>
 	window.menu = '${title}';
+	
+	window.contextRoot = '${contextRoot}'
+	
 </script>
 
 <!-- Bootstrap core CSS -->
 <link href="${css}/bootstrap.min.css" rel="stylesheet">
+
+<!-- Date Table Styling Css-->
+<link href="${css}/dataTables.bootstrap4.css" rel="stylesheet">
 
 
 <!-- Custom styles for this template -->
@@ -86,6 +92,12 @@
 		
 		<!-- DataTables Plugin-->
 		<script src="${js}/jquery.dataTables.js"></script>
+
+		<!-- DataTables BootStrap --> 
+			<script src="${js}/dataTables.bootstrap4.js"></script> 
+				
+
+
 
 		<!-- self coded java Script -->
 		<script src="${js}/myapp.js"></script>
