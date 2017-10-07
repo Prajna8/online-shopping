@@ -14,6 +14,10 @@ $(function() {
 	case 'All Products':
 		$('#listProducts').addClass('active');
 		break;
+		
+	case 'Manage Products':
+		$('#manageProducts').addClass('active');
+		break;
 	
 	default:
 		if(menu=="Home") break;
@@ -91,7 +95,7 @@ $(function() {
 									
 									if(row.quantity <1){
 										
-									str +='<a href="javascript:void(0)" class="btn btn-success btn-sm disabled"><i class="fa fa-shopping-cart" aria-hidden="true"> Add To Cart </i></span></a>';
+									str +='<a href="javascript:void(0)" class="btn-outline btn-success btn-sm disabled"><i class="fa fa-shopping-cart" aria-hidden="true"> Add To Cart </i></span></a>';
 
 									}
 									else{
