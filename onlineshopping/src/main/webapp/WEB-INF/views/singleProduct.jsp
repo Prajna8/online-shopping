@@ -1,3 +1,4 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="container">
 
 	<!-- Breadcrumb -->
@@ -24,11 +25,11 @@
 		<div class="col-sm-4">
 
 			<div>
-				
-				
+
+
 				<!-- instead of using Div thumbnail which was not working
 				 i preferred the alternative class img-thumbnail -->
-				
+
 				<img src="${images}/${product.code}.jpg" class="img-thumbnail" />
 
 			</div>
@@ -49,13 +50,46 @@
 			</h4>
 			<hr />
 
-			<h6>Qty. Available: ${product.quantity}</h6>
 
-			<a href="${contextRoot}/cart/add/${product.id}/product"
-				class="btn btn-success"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Add to Cart
-			
-			
-			</a> <a href="${contextRoot}/show/all/products" class="btn btn-success">
+
+			<c:choose>
+				<c:when test="${product.quantity < 1}">
+
+					<h6>Qty. Available:<span style="color:red"> Out of Stock</span></h6>
+
+				</c:when>
+
+				<c:otherwise>
+					<h6>Qty. Available: ${product.quantity}</h6>
+				</c:otherwise>
+
+			</c:choose>
+
+
+			<c:choose>
+				<c:when test="${product.quantity < 1}">
+
+					<a href="javascript:void(0)" class="btn btn-success disabled"><strike>
+							<i class="fa fa-shopping-cart" aria-hidden="true"></i>Add to Cart
+					</strike></a>
+
+				</c:when>
+
+				<c:otherwise>
+
+					<a href="${contextRoot}/cart/add/${product.id}/product"
+						class="btn btn-success"><i class="fa fa-shopping-cart"
+						aria-hidden="true"></i>Add to Cart</a>
+
+				</c:otherwise>
+
+			</c:choose>
+
+
+
+
+
+			<a href="${contextRoot}/show/all/products" class="btn btn-success">
 				Back</a>
 
 		</div>

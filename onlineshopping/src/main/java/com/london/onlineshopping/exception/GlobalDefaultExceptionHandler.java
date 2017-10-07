@@ -22,4 +22,27 @@ public class GlobalDefaultExceptionHandler {
 		return mv;
 		
 	}
+	
+	@ExceptionHandler(ProductNotFoundException.class)
+	public ModelAndView handlerProductNotFoundException(){
+		
+		ModelAndView mv = new ModelAndView("error");
+		mv.addObject("errorTitle", "Product not available");
+		mv.addObject("errorDescription", "The Product you are looking is not available");
+		mv.addObject("title", "Product not available ");
+		return mv;
+		
+	}
+	
+	@ExceptionHandler(Exception.class)
+	public ModelAndView handlerException(Exception ex){
+		
+		ModelAndView mv = new ModelAndView("error");
+		mv.addObject("errorTitle", "Contact the administrator for more info");
+		mv.addObject("errorDescription", ex.toString());
+		mv.addObject("title", "Error");
+		return mv;
+		
+	}
+	
 }
