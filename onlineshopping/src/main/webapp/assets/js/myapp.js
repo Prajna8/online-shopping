@@ -95,11 +95,11 @@ $(function() {
 									
 									if(row.quantity <1){
 										
-									str +='<a href="javascript:void(0)" class="btn-outline btn-success btn-sm disabled"><i class="fa fa-shopping-cart" aria-hidden="true"> Add To Cart </i></span></a>';
+									str +='<a href="javascript:void(0)" class="btn-outline btn-success btn-sm disabled"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span></a>';
 
 									}
 									else{
-										str +='<a href="'+ window.contextRoot +'/cart/add/'+ data +'/product" class="btn btn-success btn-sm "><i class="fa fa-shopping-cart" aria-hidden="true"> Add To Cart </i></span></a>';
+										str +='<a href="'+ window.contextRoot +'/cart/add/'+ data +'/product" class="btn btn-success btn-sm "><i class="fa fa-shopping-cart" aria-hidden="true"></i></span></a>';
 
 									}
 										

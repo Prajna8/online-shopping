@@ -80,6 +80,15 @@
 						</div>
 						</div>
 						
+						<!-- File element for image upload -->
+						<div class="form-group row">
+								<label class="control-label col-md-4" for="file">Select an image: </label>
+								<div class="col-md-8">
+								<sf:input type="file" path="file" id="file" class="form-control"/>
+								<sf:errors path="file" cssClass="help-block" element="em" /> 
+						</div>
+						</div>
+						
 						<div class="form-group row">
 								<label class="control-label col-md-4" for="quantity">Quantity Available: </label>
 								<div class="col-md-8">
@@ -90,15 +99,6 @@
 								/>
 						</div>
 						</div>
-						
-						<!-- File element for image upload -->
-						<div class="form-group row">
-								<label class="control-label col-md-4" for="file">Select an image: </label>
-								<div class="col-md-8">
-								<sf:input type="file" path="file" id="file" class="form-control"/>
-						</div>
-						</div>
-						
 						
 						<div class="form-group row">
 								<div class="col-md-offset col-md-8">

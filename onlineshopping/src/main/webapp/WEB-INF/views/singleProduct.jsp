@@ -69,17 +69,15 @@
 			<c:choose>
 				<c:when test="${product.quantity < 1}">
 
-					<a href="javascript:void(0)" class="btn btn-success disabled"><strike>
-							<i class="fa fa-shopping-cart" aria-hidden="true"></i>Add to Cart
-					</strike></a>
+					<a href="javascript:void(0)" class="btn btn-success disabled">
+												<i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
 
 				</c:when>
 
 				<c:otherwise>
 
 					<a href="${contextRoot}/cart/add/${product.id}/product"
-						class="btn btn-success"><i class="fa fa-shopping-cart"
-						aria-hidden="true"></i>Add to Cart</a>
+						class="btn btn-success"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
 
 				</c:otherwise>
 

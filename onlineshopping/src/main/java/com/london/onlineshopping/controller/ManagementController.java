@@ -2,6 +2,7 @@ package com.london.onlineshopping.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.london.onlineshopping.util.FileUploadUtility;
+import com.london.onlineshopping.validator.ProductValidator;
 import com.london.shoppingbackend.dao.CategoryDAO;
 import com.london.shoppingbackend.dao.ProductDAO;
 import com.london.shoppingbackend.dto.Category;
@@ -62,13 +65,18 @@ public class ManagementController {
 	
 	//Handling product submission
 	@RequestMapping(value="/products", method=RequestMethod.POST)
-	public String handleProductSubmission(@Valid @ModelAttribute("product") Product mProduct,BindingResult results, Model model ){
+	public String handleProductSubmission(@Valid @ModelAttribute("product") Product mProduct,BindingResult results, Model model,HttpServletRequest request){
+		
+		new ProductValidator().validate(mProduct,results);
+		
+		
 		
 		//Check if there are any errors
 		if(results.hasErrors()){
 			model.addAttribute("userClickManageProducts", true);
 			model.addAttribute("title", "Manage Products");
 			model.addAttribute("message","Validation failed for product submission");
+			
 			return "page";
 		}
 		
@@ -78,6 +86,11 @@ public class ManagementController {
 		//creating a new product record
 		productDAO.add(mProduct);
 		
+	if(!mProduct.getFile().getOriginalFilename().equals("")){
+		FileUploadUtility.uploadFile(request,mProduct.getFile(),mProduct.getCode());
+		
+	}
+		 
 		
 		return "redirect:/manage/products?operation=product";
 	}
