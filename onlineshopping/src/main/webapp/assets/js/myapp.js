@@ -110,7 +110,7 @@ $(function() {
 							}
 						]
 					});
-		
+	}
 			
 	//dismissing the alert after 3 seconds
 		var $alert =$('.alert');
@@ -121,8 +121,41 @@ $(function() {
 						$alert.fadeOut('slow');
 					},3000)
 				}
+			//------------------------------------------------------------------
+			
+		$('.switch input[type="checkbox"]').on('change',function(){
+			
+			var checkbox= $(this);
+			var checked= checkbox.prop('checked');
+			var dMsg = (checked)? 'You want to Activate the Product ?':
+								  'You want to Deactivate the product ?';
+			var value = checkbox.prop('value');
+			
+			bootbox.confirm({
+				size: 'medium',
+				title:'Product Activation & Deactivation',
+				message: dMsg,
+				callback:function(confirmed){
+					
+					if(confirmed){
+						console.log(value);
+						bootbox.alert({
+							size:'medium',
+							title:'Information',
+							message: 'You have performed action on the product'+ value 
+						})
+						
+					}
+					else{
+						
+						checkbox.prop('checked',!checked);
+					}
 				}
-			});  
+			})
+		
+		
+		});
+});  
 
 
 
