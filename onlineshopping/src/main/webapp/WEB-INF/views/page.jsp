@@ -116,6 +116,10 @@
 				
 		<!-- self coded java Script -->
 		<script src="${js}/myapp.js"></script>
+		
+		<!-- jQuery validator -->
+		<script src="${js}/jquery.validate.js"></script>
+		<script src="${js}/jquery.validate.min.js"></script>
 	
 	</div>
 	

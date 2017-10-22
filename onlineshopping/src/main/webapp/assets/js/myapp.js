@@ -123,38 +123,210 @@ $(function() {
 				}
 			//------------------------------------------------------------------
 			
-		$('.switch input[type="checkbox"]').on('change',function(){
+		
+	
+	//-----------------------------------	
+	//data table for admin
+	//-----------------------------------
+		
+		var $adminProductsTable =$('#adminProductsTable');
+		
+		//execute the below code only where we have this table
+		if($adminProductsTable.length){
+			//console.log('Inside the table');
 			
-			var checkbox= $(this);
-			var checked= checkbox.prop('checked');
-			var dMsg = (checked)? 'You want to Activate the Product ?':
-								  'You want to Deactivate the product ?';
-			var value = checkbox.prop('value');
+			var jsonUrl =window.contextRoot + '/json/data/admin/all/products';
 			
-			bootbox.confirm({
-				size: 'medium',
-				title:'Product Activation & Deactivation',
-				message: dMsg,
-				callback:function(confirmed){
+
+			
+			$adminProductsTable.DataTable({
+					lengthMenu: [[10, 30, 50, -1], ['10 ', '30 ', '50 ','All']],
+					pageLength: 30,
+
+					ajax: {
+						url: jsonUrl,
+						dataSrc: ''	
+					},
 					
-					if(confirmed){
-						console.log(value);
-						bootbox.alert({
-							size:'medium',
-							title:'Information',
-							message: 'You have performed action on the product'+ value 
+					columns: [
+								{
+									data:'id'
+								},
+								{
+									data:'code',
+									bSortable:false,
+									mRender: function(data,type,row){
+										
+										return '<img src="'+window.contextRoot+'/resources/images/'+data+'.jpg" class="adminDataTableImg"/>';
+									}
+									
+								},
+								{
+									data:'name'
+								},
+								{
+									data:'brand'	
+								},
+								
+								{
+									data:'quantity',
+									mRender: function(data,type,row){
+										
+										if(data <1){
+											return '<span style="color:red"> Out of Stock </span>';
+										}
+										return data;
+									}
+								},
+								{
+									data:'unitPrice',
+									mRender: function(data, type, row){
+										return '&#8377; ' + data
+									}
+								},
+								{
+									data:'active',
+									bSortable: false,
+									mRender:function(data,type,row){
+										var str='';
+										
+										str += '<label class="switch">';
+										if (data){
+											str+= '<input type="checkbox" checked="checked" value="'+row.id+'" />';
+										}
+										else{
+											str+= '<input type="checkbox" value="'+row.id+'" />';
+										}
+										str+= '<div class="slider"></div></label>';
+									
+										return str;
+									}
+									
+								}, 
+								{
+									//this is for the edit button
+									data:'id',
+									bSortable:false,
+									mRender: function(data,type,row){
+										
+										var str='';
+										
+								str += '<a href="'+window.contextRoot+'/manage/'+data+'/product" class="btn btn-warning">';
+								str += '<i class="fa fa-pencil" aria-hidden="true"></i></a>';
+										
+										return str;
+									}
+									
+								}
+							],
+							
+				initComplete: function(){
+					
+					var api = this.api();
+					api.$('.switch input[type="checkbox"]').on('change',function(){
+						
+						var checkbox= $(this);
+						var checked= checkbox.prop('checked');
+						var dMsg = (checked)? 'You want to Activate the Product ?':
+											  'You want to Deactivate the product ?';
+						var value = checkbox.prop('value');
+						
+						bootbox.confirm({
+							size: 'medium',
+							title:'Product Activation & Deactivation',
+							message: dMsg,
+							
+							//	WHEN OK IS CLICKED THE CONFIRMED FUNCTION IS EXECUTED 
+							callback:function(confirmed){
+								
+							//very important code help in keeping the de-active product de-active even if you change the directory
+								if(confirmed){
+									console.log(value);
+									
+									var activationUrl = window.contextRoot + '/manage/product/' + value +'/activation';
+									
+									$.post(activationUrl, function(data){
+										
+										bootbox.alert({
+											size:'medium',
+											title:'Information',
+											message: data
+										});
+										
+									});
+									
+									
+								}
+								else{
+									
+									checkbox.prop('checked',!checked);
+								}
+							}
 						})
-						
-					}
-					else{
-						
-						checkbox.prop('checked',!checked);
-					}
+					
+					
+					});
+					
 				}
-			})
+							
+							
+						});
+		}
 		
 		
+		
+	
+		
+	//-----------------------------------------	
+	
+//validation code for category
+		
+	var $categoryForm = $('#categoryForm');	
+		
+	if($categoryForm.length){
+		
+		$categoryForm.validate({
+			
+			rules: {
+				
+				name: {
+					required: true,
+					minlength: 2
+					
+				},
+				
+				description:{
+					required: true
+				}
+			},
+			
+			message: {
+				
+				name: {
+					
+					required: 'Please add the category name',
+					minlength: 'The category name should not be less than 2 character'
+				},
+				
+			description: {
+				
+					required:'Please add a description for this category'
+				}
+			},
+			errorElement: 'em',
+			errorPlacement: function(error, element){
+				
+				//here we add the class of help-block
+				error.addClass('help-block');
+				// add the error element after the input element
+				error.insertAfter(element);
+			}
+			
 		});
+	}
+		
+//--------------------------------------------------------	
+	
 });  
 
 

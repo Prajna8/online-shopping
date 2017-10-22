@@ -29,6 +29,17 @@ public class JsonDataController {
 		return productDAO.listActiveProducts();
 	}
 	
+	@RequestMapping("admin/all/products")
+	
+	//here data in returned in the form of json so we 
+	//use this annotation here Response body
+	//now looking for convertion will be taken care by fasterxml
+	@ResponseBody
+	public List<Product> getAllProductsForAdmin(){
+		
+		return productDAO.list();
+	}
+	
 	@RequestMapping("/category/{id}/products")
 	@ResponseBody
 	public List<Product> getProductsByCategory(@PathVariable int id){

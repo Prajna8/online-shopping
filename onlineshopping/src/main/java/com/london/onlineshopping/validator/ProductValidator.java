@@ -25,9 +25,9 @@ public class ProductValidator implements Validator {
 			errors.rejectValue("file", null,"Please select an image file to upload");
 			return;
 			}
-			if(! (	product.getFile().getContentType().equals("images/jpeg")||
-					product.getFile().getContentType().equals("images/png")||
-					product.getFile().getContentType().equals("images/gif")
+			if(! (	product.getFile().getContentType().equals("image/jpeg")||
+					product.getFile().getContentType().equals("image/png")||
+					product.getFile().getContentType().equals("image/gif")
 			   ))
 			{
 				errors.rejectValue("file",null,"Please use only image file for upload");

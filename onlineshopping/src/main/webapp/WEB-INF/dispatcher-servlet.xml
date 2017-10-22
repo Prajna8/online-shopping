@@ -1,3 +1,4 @@
+
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
@@ -19,6 +20,7 @@
 <!-- <context:component-scan base-package="com.london" /> 
 			we can also write like this the whole package is scan
 				but i will not do this coz i am not crazy-->
+
 
 <context:component-scan base-package="com.london.onlineshopping" />
 <context:component-scan base-package="com.london.shoppingbackend" />
