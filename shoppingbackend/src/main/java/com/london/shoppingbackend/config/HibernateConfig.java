@@ -79,6 +79,10 @@ Properties properties = new Properties();
 		properties.put("hibernate.show_sql", "true");
 		properties.put("hibernate.format_sql", "true");
 		
+//		this will drop the table everytime and recreate it
+		
+		properties.put("hibernate.hbm2ddl.auto","update");
+		
 		return properties;
 	}
 	

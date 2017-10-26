@@ -76,6 +76,37 @@ VALUES ('ILYCFC4','Macbook Pro ','apple','This is a Laptop from apple','74000','
 INSERT INTO product (code,name,brand,description,unit_price,quantity,is_active,category_id,supplier_id,purchases,views)
 VALUES ('ILYCFC5','Dell Inspiron ','dell','This is a Laptop from Dell','32000','5','true','1','3','0','0');
 
+-- the address table to store the user billing and shipping addresses
+CREATE TABLE address (
+	id IDENTITY,
+	user_id int,
+	address_line_one VARCHAR(100),
+	address_line_two VARCHAR(100),
+	city VARCHAR(20),
+	state VARCHAR(20),
+	country VARCHAR(20),
+	postal_code VARCHAR(10),
+	is_billing BOOLEAN,
+	is_shipping BOOLEAN,
+	CONSTRAINT fk_address_user_id FOREIGN KEY (user_id ) REFERENCES user_detail (id),
+	CONSTRAINT pk_address_id PRIMARY KEY (id)
+);
 
+-- adding a supplier correspondece address
+INSERT INTO address( user_id, address_line_one, address_line_two, city, state, country, postal_code, is_billing, is_shipping) 
+VALUES (2, '102 Sabarmati Society, Mahatma Gandhi Road', 'Near Salt Lake, Gandhi Nagar', 'Ahmedabad', 'Gujarat', 'India', '111111', true, false );
+
+-- the cart table to store the user cart top-level details
+CREATE TABLE cart (
+	id IDENTITY,
+	user_id int,
+	grand_total DECIMAL(10,2),
+	cart_lines int,
+	CONSTRAINT fk_cart_user_id FOREIGN KEY (user_id ) REFERENCES user_detail (id),
+	CONSTRAINT pk_cart_id PRIMARY KEY (id)
+)
+-- adding a cart for testing 
+--so far error null value false
+INSERT INTO cart (user_id, grand_total, cart_lines) VALUES (null, 0, 0);
 
 

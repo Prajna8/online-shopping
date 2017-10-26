@@ -6,7 +6,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
         
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav mr-auto">
             <li class="nav-item ">
               <a class="nav-link" href="${contextRoot}/home">Home
                 <span class="sr-only">(current)</span>
@@ -26,6 +26,24 @@
             </li>
             
           </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+          	
+          	<li class="nav-item" id="register">
+              <a class="nav-link" href="${contextRoot}/register">Sign Up</a>
+            </li>
+            
+            <li class="nav-item" id="login">
+              <a class="nav-link" href="${contextRoot}/login">Login</a>
+            </li>
+          	
+          
+          </ul>
+          
         </div>
+        
+        <!-- Navbar collapse -->
+      
       </div>
+      <!-- Container collapse -->
     </nav>
