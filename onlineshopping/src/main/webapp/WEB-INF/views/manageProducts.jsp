@@ -159,10 +159,15 @@
 		</div>
 	
 		<div class="col-md-12">
-		<div style="overflow:auto">
+		
 				
 		<!-- Product tabel for admin -->
-		<table id="adminProductsTable" class="table table-stripped table-bordered">
+		
+		<div class="container-fluid">
+		
+			<div class="table-responsive">
+			
+			<table id="adminProductsTable" class="table table-stripped table-bordered">
 			
 				<thead>
 					<tr>
@@ -193,9 +198,18 @@
 				</tfoot>
 			</table>
 			
+			</div>
+		
+		
+		</div>
+		
+		
+		
+		
+			
 			  
 			
-			</div>
+			
 		</div>
 	</div>
 <div class="row justify-content-md-center">

@@ -20,8 +20,8 @@ id IDENTITY,
 first_name 	VARCHAR(50),
 last_name VARCHAR(50),
 role VARCHAR(50),
-enable BOOLEAN,
-password VARCHAR(50),
+enabled BOOLEAN,
+password VARCHAR(60),
 email VARCHAR(100),
 contact_number VARCHAR(15),
 CONSTRAINT pk_user_id PRIMARY KEY(id),
@@ -29,17 +29,20 @@ CONSTRAINT pk_user_id PRIMARY KEY(id),
 );
 
 INSERT INTO user_detail
-(first_name,last_name,role,enable,password,email,contact_number)
-VALUES ('Frank', 'Lampard','ADMIN','true','admin','fl@gmail.com','888888');
+(first_name,last_name,role,enabled,password,email,contact_number)
+VALUES ('Frank', 'Lampard','ADMIN','true','$2y$10$bkwm.wXgLtMYeBI0zdRLEO.efSKmJLfRR966isSY95MMLizhf1GbO','fl@gmail.com','888888');
 
 INSERT INTO user_detail
-(first_name,last_name,role,enable,password,email,contact_number)
-VALUES ('Eden', 'Hazard','SUPLIER','true','12345','eh@gmail.com','10101010');
+(first_name,last_name,role,enabled,password,email,contact_number)
+VALUES ('Eden', 'Hazard','SUPLIER','true','$2y$10$ZcZn2k8kwMDO4GlY1vXVZOMWLJlMXz8JEnv9Rxp7aIfAkna7qtwXm','eh@gmail.com','10101010');
 
 INSERT INTO user_detail
-(first_name,last_name,role,enable,password,email,contact_number)
-VALUES ('Alvaro', 'Morata','SUPPLIER','true','12345','ra@gmail.com','99999999');
+(first_name,last_name,role,enabled,password,email,contact_number)
+VALUES ('Alvaro', 'Morata','SUPPLIER','true','$2y$10$5AkdhRu4Dsji8U8MpOPN7.8jA4J5lozLseD2vPS.ZJGmwDQ/THedy','ra@gmail.com','99999999');
 
+INSERT INTO user_detail
+(first_name,last_name,role,enabled,password,email,contact_number)
+VALUES ('test', 'ok','ADMIN','true','$2y$10$zQzyzD/yOqVnTaYRa0aLAOZ9028nDgAX5E5O54jb11BsW/Gz330z6','ram@gmail.com','9810000000');
 
 CREATE TABLE product (
 	id IDENTITY,
@@ -109,4 +112,45 @@ CREATE TABLE cart (
 --so far error null value false
 INSERT INTO cart (user_id, grand_total, cart_lines) VALUES (null, 0, 0);
 
+CREATE TABLE cart_line (
+	id IDENTITY,
+	cart_id int,
+	total DECIMAL(10,2),
+	product_id int,
+	product_count int,
+	buying_price DECIMAL(10,2),
+	is_available boolean,
+	CONSTRAINT fk_cartline_product_id FOREIGN KEY (product_id ) REFERENCES product (id),
+	CONSTRAINT pk_cartline_id PRIMARY KEY (id)
+);
 
+
+-- the order detail table to store the order
+
+CREATE TABLE order_detail (
+	id IDENTITY,
+	user_id int,
+	order_total DECIMAL(10,2),
+	order_count int,
+	shipping_id int,
+	billing_id int,
+	order_date date,
+	CONSTRAINT fk_order_detail_user_id FOREIGN KEY (user_id) REFERENCES user_detail (id),
+	CONSTRAINT fk_order_detail_shipping_id FOREIGN KEY (shipping_id) REFERENCES address (id),
+	CONSTRAINT fk_order_detail_billing_id FOREIGN KEY (billing_id) REFERENCES address (id),
+	CONSTRAINT pk_order_detail_id PRIMARY KEY (id)
+);
+
+-- the order item table to store order items
+
+CREATE TABLE order_item (
+	id IDENTITY,
+	order_id int,
+	total DECIMAL(10,2),
+	product_id int,
+	product_count int,
+	buying_price DECIMAL(10,2),
+	CONSTRAINT fk_order_item_product_id FOREIGN KEY (product_id) REFERENCES product (id),
+	CONSTRAINT fk_order_item_order_id FOREIGN KEY (order_id) REFERENCES order_detail (id),
+	CONSTRAINT pk_order_item_id PRIMARY KEY (id)
+);

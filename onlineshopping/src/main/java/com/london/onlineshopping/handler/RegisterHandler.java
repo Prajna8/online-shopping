@@ -5,6 +5,7 @@ package com.london.onlineshopping.handler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.london.onlineshopping.model.RegisterModel;
@@ -20,6 +21,9 @@ import com.london.shoppingbackend.dto.User;
 	 
 	 @Autowired
 	 private UserDAO userDAO;
+	 
+	 @Autowired
+		private BCryptPasswordEncoder passwordEncoder;
 	 
  
  public RegisterModel init(){
@@ -76,6 +80,10 @@ import com.london.shoppingbackend.dto.User;
  				cart.setUser(user);
  				user.setCart(cart);
  		}
+ 		
+ 		//encode the password
+ 		user.setPassword(passwordEncoder.encode(user.getPassword()));
+ 		
  		
  		//save the user
  		userDAO.addUser(user);

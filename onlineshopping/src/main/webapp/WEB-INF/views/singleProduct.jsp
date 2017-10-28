@@ -1,4 +1,5 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <div class="container">
 
 	<!-- Breadcrumb -->
@@ -65,7 +66,7 @@
 
 			</c:choose>
 
-
+			 <security:authorize access="hasAuthority('USER')"> 
 			<c:choose>
 				<c:when test="${product.quantity < 1}">
 
@@ -82,10 +83,16 @@
 				</c:otherwise>
 
 			</c:choose>
+			</security:authorize> 
+	
+			 <security:authorize access="hasAuthority('ADMIN')"> 
+			
+			<a href="${contextRoot}/manage/${product.id}/product"
+						class="btn btn-warning"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Edit</a> 
+			
 
-
-
-
+			 </security:authorize> 
+			
 
 			<a href="${contextRoot}/show/all/products" class="btn btn-success">
 				Back</a>

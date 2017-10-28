@@ -194,8 +194,9 @@ input:checked + .slider:before {
 }
 Try it Yourself »
 
-
-
+.table-responsive{
+	over-flow-x: inherit;
+}
 
 
 

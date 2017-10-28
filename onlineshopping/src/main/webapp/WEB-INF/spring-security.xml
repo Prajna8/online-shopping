@@ -1,0 +1,92 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<!-- <http> <intercept-url pattern="/**" access="hasRole('USER')" /> <form-login 
+		/> <logout /> </http> -->
+
+	<!-- so that the bean gets initialized before then spring servlet -->
+	<context:component-scan base-package="com.london.shoppingbackend"/>
+	
+	<beans:bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
+	
+	<http pattern="/resources/**" security="none"/>
+	
+
+	<http>
+	<!-- the following order is very important because for login it will check permit all and will not restrict for other user -->
+		
+		<!-- this is only admin access -->
+		<intercept-url pattern="/manage/**" access="hasAuthority('ADMIN')" />
+		
+		<!-- this is only user access -->
+		<intercept-url pattern="/cart/**" access="hasAuthority('USER')" />		
+		
+		<!-- and the rest of the world -->
+		<intercept-url pattern="/**" access="permitAll" />
+		
+		<form-login login-page="/login" />
+		
+		<access-denied-handler error-page="/access-denied"/>
+		
+		
+	<!-- this is a bad idea- never disable it -->
+	<!-- 	<csrf disabled="true"/> -->
+		
+		
+	</http>
+
+	<!-- the difference between hasRole and hasAuthurity: hasRole must be prefixed 
+		by ROLE_(if dont use ROLE_prefix and start your server, when we try to login 
+		in the login page we will get a 403 Access denied page as the role is not 
+		matching) But hasAuthurity must match with name which is being specified 
+		that if hasAuthority('User') then instead of ROLE_USER we will just use USER -->
+
+
+	<!-- <authentication-manager>
+		<authentication-provider>
+			this much must be added to work with JDBC user service
+			<jdbc-user-service data-source-ref="dataSource"
+
+		users-by-username-query="select email,password, enabled from user_detail where email = ?"
+				authorities-by-username-query="select email, role from user_detail where email = ?" />
+
+
+		</authentication-provider>
+	</authentication-manager> -->
+
+	<authentication-manager>
+		<authentication-provider>
+ 			
+ 		<password-encoder ref="passwordEncoder" />
+ 			
+ 			<jdbc-user-service data-source-ref="dataSource"
+ 				authorities-by-username-query="select email, role from user_detail where email = ?"
+ 				users-by-username-query="select email, password, enabled from user_detail where email = ?"
+ 			/>
+ 		</authentication-provider>
+	</authentication-manager>
+
+
+
+
+
+
+
+
+	<!-- <authentication-manager> <authentication-provider> <user-service> we 
+		are already using hasRole so the ROLE_USER <user name="tyler" password="durden" 
+		authorities="ROLE_USER, ROLE_ADMIN" /> </user-service> </authentication-provider> 
+		</authentication-manager> -->
+
+</beans:beans>

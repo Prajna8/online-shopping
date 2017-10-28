@@ -1,3 +1,5 @@
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+  
    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
         <a class="navbar-brand" href="${contextRoot}/home">Online - Shopping</a>
@@ -21,14 +23,17 @@
             <li class="nav-item" id="listProducts">
               <a class="nav-link" href="${contextRoot}/show/all/products">View Product</a>
             </li>
+            
+            <security:authorize access="hasAuthority('ADMIN')">
             <li class="nav-item" id="manageProducts">
               <a class="nav-link" href="${contextRoot}/manage/products">Manage Product</a>
             </li>
-            
+            </security:authorize>
           </ul>
           
-          <ul class="nav navbar-nav navbar-right">
-          	
+          <ul class="nav navbar-nav mr-auto">
+          	<security:authorize access="isAnonymous()">
+          
           	<li class="nav-item" id="register">
               <a class="nav-link" href="${contextRoot}/register">Sign Up</a>
             </li>
@@ -37,7 +42,47 @@
               <a class="nav-link" href="${contextRoot}/login">Login</a>
             </li>
           	
+          	</security:authorize>
+          	
+          	<security:authorize access="isAuthenticated()">
+          	<li class="dropdown" >
+           	
+         	<a href="javascript:void(0)"
+         			class=" nav-link btn btn-default dropdown-toggle"
+          			  id="dropdownMenu" 
+          			 	data-toggle="dropdown" 
+          			 		aria-haspopup="true" 
+          			 			aria-expanded="true">
+          		
+          		${userModel.fullName}
+          		
+          		
+          		</a> 
+          		<ul class="dropdown-menu">
+          		
+          		<security:authorize access="hasAuthority('USER')">
+          		
+          			<li>
+          			<a href="${contextRoot}/cart">
+          			<i class="fa fa-cart-plus" aria-hidden="true"></i>
+          			<span class="badge">${userModel.cart.cartLines}</span>
+          			- &#8377; ${userModel.cart.grandTotal}
+          			</a>
+          			</li>
+          			
+          		<li class="divider" role="separator"></li>
+          		</security:authorize>
+          		
+          		<li>
+          			<a href="${contextRoot}/perform-logout">Logout</a>
+          		</li>
+          		
+          		</ul>
+          		
+          	
+          	</li>
           
+         </security:authorize>  
           </ul>
           
         </div>
@@ -47,3 +92,15 @@
       </div>
       <!-- Container collapse -->
     </nav>
+    
+   <script>
+    
+    window.userRole = '${userModel.role}';
+    
+    </script> 
+    
+    
+    
+    
+    
+    

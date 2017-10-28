@@ -27,8 +27,8 @@
 
 
 <context:component-scan base-package="com.london.onlineshopping" ></context:component-scan>
-<context:component-scan base-package="com.london.shoppingbackend" ></context:component-scan>
-
+<!-- <context:component-scan base-package="com.london.shoppingbackend" ></context:component-scan> -->
+<!-- the backend is moved to spring-security.xml; so that the bean gets initialized before then spring servlet -->
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
