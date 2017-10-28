@@ -45,7 +45,7 @@
           	</security:authorize>
           	
           	<security:authorize access="isAuthenticated()">
-          	<li class="dropdown" >
+          	<li class="dropdown">
            	
          	<a href="javascript:void(0)"
          			class=" nav-link btn btn-default dropdown-toggle"
@@ -63,7 +63,7 @@
           		<security:authorize access="hasAuthority('USER')">
           		
           			<li>
-          			<a href="${contextRoot}/cart">
+          			<a href="${contextRoot}/cart/show">
           			<i class="fa fa-cart-plus" aria-hidden="true"></i>
           			<span class="badge">${userModel.cart.cartLines}</span>
           			- &#8377; ${userModel.cart.grandTotal}
